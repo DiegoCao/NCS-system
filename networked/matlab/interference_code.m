@@ -1,5 +1,5 @@
 function [exectime, data] = interference_code(seg, data)
-
+BWshare = 0;
 %BWshare = data;
 ran = ttAnalogIn(1);
 if ran < BWshare
@@ -8,5 +8,4 @@ end
 
 while ~isempty(ttGetMsg) % read old received messages (if any)
 end
-
 exectime = -1;
