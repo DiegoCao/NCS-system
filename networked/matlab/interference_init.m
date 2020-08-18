@@ -6,12 +6,8 @@ function interference_init(arg)
 
 % Initialize TrueTime kernel
 ttInitKernel('prioFP');  % fixed priority scheduling
-
-
 % Interference task
 period = 0.001;
-offset = 0.0005;
+offset = 0.005;
 data = arg;
-
-
 ttCreatePeriodicTask('interference_task', offset, period, 'interference_code', data);

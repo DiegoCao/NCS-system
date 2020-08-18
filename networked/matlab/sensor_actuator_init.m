@@ -12,7 +12,6 @@ starttime = 0.0;
 period = 0.010;
 ttCreatePeriodicTask('sensor_task', starttime, period, 'sensor_code');
 
-
 % Sporadic actuator task, activated by arriving network message
 deadline = 10.0;
 ttCreateTask('actuator_task', deadline, 'actuator_code');
