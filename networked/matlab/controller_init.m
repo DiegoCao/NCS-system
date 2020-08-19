@@ -13,12 +13,14 @@ ttInitKernel('prioDM') % deadline-monotonic scheduling
 data.beta=1;
 data.h = 0.001;
 %data.h = [0.010;0.010];
-data.K = 0.5;
+data.K = 23.16;
 %data.K=[-75.4995,92.7410,344.5808,26.0758];
 % K 对应倒立摆模型中一个1x4的matrix
 %change K into 2x2 mat
-data.Td = 0.04;
-data.Ti = 0.60460;
+data.Kd =  3.007;
+data.Ki = 36.42;
+data.Td = data.Kd/data.K;
+data.Ti = data.K/data.Ki;
 data.N = 100.0;
 	
 data.ad = data.Td/(data.N*data.h+data.Td);
