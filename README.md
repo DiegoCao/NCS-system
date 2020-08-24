@@ -1,5 +1,5 @@
 # NCS-system
-**For details of update data go to section: 
+**For details of update data go to section:** 
 [Update](https://github.com/DiegoCao/NCS-system/blob/master/Update%20Notes)
 ## Update on 8.18
 
