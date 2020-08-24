@@ -8,12 +8,14 @@ PID 参数：
 8.19
 Kp=23.16; Kd=3.007; Ki=36.42.
 
-## Update
+## Update on 8.22
 Number Coefficients: 
 [0.1804 1.39 2.185 0 0]
 Denominator Coefficients:
 [0.0204 0.2528 0.9881 2.244 0 0]
 
+## Update on 8.23
+开始part3书写
 
 ## Update on 8.24
 Using Theoretical calculation（劳斯判据），结合matlab代码理论计算Kp Ki Kd范围
@@ -66,3 +68,4 @@ pc=eig(Gc)
 p1=pole(G);%求系统的极点
 r=roots(den);%求系统的特征方程的根
 ```
+结合劳斯判据可使三阶系统a1 a2 a3 a0均为正数且a2a1>a3a0
