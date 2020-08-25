@@ -7,6 +7,7 @@ Create this library 以防我删掉数据后凉了。
 ## Update on 8.18
 
 对倒立摆系统(cpcc)上的，最后Ti=0.60。
+*然而现在这个没用了，最后通过控制Kp Ki Kd，且cpcc上的如果不加Kd不可能稳定*
 
 ## Update on 8.19
 PID 参数：
