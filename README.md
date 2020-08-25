@@ -4,10 +4,16 @@
 
 ## Update on 8.17 
 Create this library 以防我删掉数据后凉了。
+先前10天已完成工作：
+1. 建立模型并成功仿真
+2. 分别将传递函数或Time-transient的model接入truetime中
+
+现仍需解决问题：如何让倒立摆系统最终趋于稳定态。
 ## Update on 8.18
 
 对倒立摆系统(cpcc)上的，最后Ti=0.60。
-*然而现在这个没用了，最后通过控制Kp Ki Kd，且cpcc上的如果不加Kd不可能稳定*
+
+*然而现在这个没用了，最后通过控制Kp Ki Kd，且cpcc上的如果不加Kd不可能稳定*（8.24）
 
 ## Update on 8.19
 PID 参数：
