@@ -1,0 +1,132 @@
+\documentclass[a4paper]{ctexart}
+\usepackage[colorlinks,linkcolor=black,urlcolor=black]{hyperref}
+\usepackage{float}
+\usepackage{mhchem}
+\usepackage{pdfpages}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{wrapfig}
+\usepackage{geometry}
+\usepackage{indentfirst}
+\usepackage{listings}
+\usepackage{multirow} 
+\usepackage{comment}
+\setlength{\parindent}{2em}
+\usepackage[greek,english]{babel} 
+%\renewcommand\thesection{\Roman{section}}
+%\renewcommand\thesubsection{\Alph{subsection}}
+\geometry{left=3.5cm,right=3.5cm,top=3.3cm,bottom=3.3cm}
+\usepackage{comment}
+\lstset{language=Matlab,
+   keywords={break,case,catch,continue,else,elseif,end,for,function,
+      global,if,otherwise,persistent,return,switch,try,while},
+   basicstyle=\ttfamily,
+   keywordstyle=\color{blue},
+   commentstyle=\color{red},
+   stringstyle=\color{green},
+   numbers=left,
+   numberstyle=\tiny\color{gray},
+   stepnumber=1,
+   numbersep=10pt,
+   backgroundcolor=\color{white},
+   tabsize=4,
+   showspaces=false,
+   showstringspaces=false}
+
+\begin{document}
+
+\section{系统模型}
+\subsection{倒立摆模型}
+(这里
+在网络的plant中采用直线型一级倒立摆系统，将倒立摆模型近似线性化，得到如下控制公式：
+\begin{equation}
+\dot{\mathbf{x}}=A \mathbf{x}+B u
+\end{equation}
+在公式中
+\begin{equation}
+A=\left[\begin{array}{cccc}
+0 & 1 & 0 & 0 \\
+0 & -\frac{b\left(J+m L^{2}\right)}{K} & -\frac{m^{2} L^{2} g}{K} & 0 \\
+0 & 0 & 1 & 0 \\
+0 & \frac{m L b}{K} & \frac{m L g(M+m)}{K} & 0
+\end{array}\right], B=\left[\begin{array}{c}
+0 \\
+\frac{J+m L^{2}}{K} \\
+0 \\
+-\frac{m L}{K}
+\end{array}\right]
+\end{equation}
+其中，$J$为转动惯量，$M$为小车质量，$m$为摆杆质量，$l$为摆杆轴心到质心的长度，$b$为小车滑动摩擦系数，$c$为小车转动摩擦系数。
+
+取$M=10$, $m=2$, $J=10$, $b=0.1$, $c=0.1$, $l=0.3$
+该系统的传递函数为：
+\begin{equation}
+G(s)=\frac{8s^2}{448.1s^4+4.401s^3-960s^2+8s}
+\end{equation}
+
+对于该连续系统存在两位于右半平面零点，该倒立摆系统不稳定。将该倒立摆系统接入网络模型中作为plant。
+
+
+\subsection{基于Truetime网络系统模型的建立}
+利用上一部分所介绍的Truetime工具，建立下图所示网络模型：
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{t1.png}
+\caption{基于Truetime的网络仿真模型}
+\end{figure}
+
+对各部分模块：
+
+1. 对网络模块(Truetime Network)，采用CSMA/AMP(CAN)网络协议，设置传输率为80000bit/s，最小帧长为80字节。
+
+2. 对plant的倒立摆部分，以传递函数模块接入闭环中。
+
+3. 对控制器采用PID控制器，其传递函数：
+\begin{equation}
+G(s)=\frac{K_d s^2+K_p s +K_d}{s}
+\end{equation}
+
+通过调节传递函数参数$K_p,K_i,K_d$测试系统稳定性。
+
+4. 对攻击分为丢包率与干扰信号。
+
+
+\section{仿真验证}
+\subsection{无网络攻击下结果}
+无加入网络攻击前，通过调节PID参数为$K_p=1240,K_i=1000,K_d=100.01$,网络相应曲线如下：
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{s1.jpg}
+\caption{无网络攻击下的阶跃响应曲线}
+\end{figure}
+
+如理论验证系统闭环函数，可得系统闭环函数为
+\begin{equation}
+G(s)=\frac{8s^3}{448.1s^5+805.3s^4+8960s^3}
+\end{equation}
+
+通过劳斯判据可判定全系统稳定。
+
+\subsection{网络攻击下结果}
+当设置丢包率为0.5s时，并同时向系统施加干扰信号（通过Truetime在controller代码中创建干扰信号任务），网络响应曲线如下：
+
+由图可得此时网络噪声过多且系统响应幅度过大，无法成功追踪传入的阶跃响应。
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{s2.jpg}
+\caption{网络攻击下阶跃响应}
+\end{figure}
+
+
+
+\subsection{改正控制器后网络攻击下结果}
+通过调节PID参数，以使得系统在存在攻击时也能达到相对稳定，并减小波动1：
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{s3new.jpg}
+\caption{改变PID控制器后的阶跃响应}
+\end{figure}
+\end{document}

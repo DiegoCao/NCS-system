@@ -13,16 +13,16 @@ ttInitKernel('prioDM') % deadline-monotonic scheduling
 data.beta=1;
 data.h = 0.001;
 %data.h = [0.010;0.010];
-data.K = 23.16;
+%data.K = 23.16;
 %data.K=[-75.4995,92.7410,344.5808,26.0758];
 % K 对应倒立摆模型中一个1x4的matrix
 %change K into 2x2 mat
-data.Kd =  3.007;
-data.Ki = 36.42;
+data.K =  1740; %kp
+data.Ki = 5000;
+data.Kd = 350;
 data.Td = data.Kd/data.K;
 data.Ti = data.K/data.Ki;
 data.N = 100.0;
-	
 data.ad = data.Td/(data.N*data.h+data.Td);
 data.bd = data.N*data.K*data.ad;
 data.yold = 0;
@@ -33,9 +33,8 @@ data.u = 0;
 deadline = data.h;
 ttCreateTask('controller_task', deadline, 'controller_code', data);
 ttAttachNetworkHandler('controller_task');
-% Periodic dummy task with higher priority
-%starttime = 0.0;
-%period = 0.007;
-%data = period*arg;
-%ttCreatePeriodicTask('dummy_task', starttime, period, 'dummy_code', data);
-
+%Periodic dummy task with higher priority
+starttime = 0.0;
+period = 0.007;
+data = period*arg;
+ttCreatePeriodicTask('dummy_task', starttime, period, 'dummy_code', data);
