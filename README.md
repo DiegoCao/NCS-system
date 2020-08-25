@@ -89,3 +89,9 @@ r=roots(den);%求系统的特征方程的根
 对于s3.png数据如下:
 $[Kp Ki Kd]=[1240 1000 69.2]$
 
+更新：对于s3new一组更好的数据：
+```matlab
+data.K =  1740; %kp
+data.Ki = 3000;
+data.Kd = 200;
+```
