@@ -1,6 +1,9 @@
 # NCS-system
 **For details of update data go to section:** 
 [Update](https://github.com/DiegoCao/NCS-system/blob/master/Update%20Notes)
+
+## Update on 8.17 
+Create this library 以防我删掉数据后凉了。
 ## Update on 8.18
 
 对倒立摆系统(cpcc)上的，最后Ti=0.60。
