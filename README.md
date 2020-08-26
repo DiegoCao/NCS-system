@@ -100,5 +100,11 @@ data.Kd = 200;
 ## Update on 8.26
 第二幅图参数更新
 $[Kp Ki Kd]=[400 100 10]$
-
-
+对应图
+```matlab
+data.K =  241; %kp
+%data.Ki = 5000;
+data.Ki = 100;
+data.Kd = 46.4;
+```
+![](https://codimd.s3.shivering-isles.com/demo/uploads/upload_95c235030edd0e289b6307928b2b872b.png)
