@@ -108,3 +108,7 @@ data.Ki = 100;
 data.Kd = 46.4;
 ```
 ![](https://codimd.s3.shivering-isles.com/demo/uploads/upload_95c235030edd0e289b6307928b2b872b.png)
+
+## 8.27
+Kp Ki Kd
+ 156.9988  100.0000  152.3757
