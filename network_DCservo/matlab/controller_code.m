@@ -9,9 +9,11 @@ switch seg
   end
   r = ttAnalogIn(1);    % Read reference value
   P = data.K*(r-y);
-  D = data.ad*data.Dold + data.bd*(data.yold-y);
-  data.u = P + D;
-  data.Dold = D;
+  I = data.Iold + data.h*(r-y)*data.Ti;
+  %D = data.ad*data.Dold + data.bd*(data.yold-y);
+  data.u = P + I;
+  %data.Dold = D;
+  data.Iold = I;
   data.yold = y;
   exectime = 0.0005;
  case 2
